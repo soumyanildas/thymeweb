@@ -1,0 +1,26 @@
+$tablet: 991px;
+$mobile: 767px;
+
+.sticky {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  width: 100%;
+}
+
+.categories {
+
+  @media (max-width: $mobile) {
+    width: 500px;
+    overflow-x: scroll;
+  }
+
+  .nav {
+
+    @media (max-width: $mobile) {
+      flex-wrap: nowrap;
+      width: 500px;
+    }
+  }
+
+}
