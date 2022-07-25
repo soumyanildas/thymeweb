@@ -1,11 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { DetailsComponent } from './details/details.component';
-import { ErrorComponent } from './error/error.component';
-import { HomeComponent } from './home/home.component';
-import { ListingComponent } from './listing/listing.component';
-import { PaymentComponent } from './payment/payment.component';
 
 const routes: Routes = [
   {
@@ -15,27 +9,23 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'listings',
-    component: ListingComponent
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule)
   },
   {
     path: 'details/:id',
-    component: DetailsComponent
+    loadChildren: () => import('./details/details.module').then((m) => m.DetailsModule)
   },
   {
     path: 'checkout',
-    component: CheckoutComponent
+    loadChildren: () => import('./checkout/checkout.module').then((m) => m.CheckoutModule)
   },
   {
     path: 'payment',
-    component: PaymentComponent
+    loadChildren: () => import('./payment/payment.module').then((m) => m.PaymentModule)
   },
   {
     path: '**',
-    component: ErrorComponent
+    loadChildren: () => import('./error/error.module').then((m) => m.ErrorModule)
   }
 
 
