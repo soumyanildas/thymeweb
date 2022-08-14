@@ -1,7 +1,12 @@
-import { Item } from "./Item";
+import { ItemModified } from "./Item";
+import { Store } from "./Store";
 
 export interface Cart {
-  item: Item;
+  store: Partial<Store>;
+  items: CartItem[];
+}
+
+export interface CartItem extends ItemModified {
   quantity: number;
-  totalPrice: number; 
+  totalPrice: number;
 }

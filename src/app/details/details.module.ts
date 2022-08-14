@@ -6,6 +6,10 @@ import { DetailsItemComponent } from './details-item/details-item.component';
 import { DetailsCardComponent } from './details-card/details-card.component';
 import { ModifierDialogComponent } from './modifier-dialog/modifier-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { StickyScrollDirective } from '../directives/scroll/sticky-scroll.directive';
+import { InViewportDirective } from '../directives/in-viewport/in-viewport.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   {
@@ -21,11 +25,16 @@ const routes: Routes = [
     DetailsItemComponent,
     DetailsCardComponent,
     ModifierDialogComponent,
+    StickyScrollDirective,
+    InViewportDirective
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    MatDialogModule
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class DetailsModule { }

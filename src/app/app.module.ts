@@ -6,17 +6,14 @@ import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { InViewportDirective } from './directives/in-viewport/in-viewport.directive';
-import { StickyScrollDirective } from './directives/scroll/sticky-scroll.directive';
 import { ErrorInterceptor } from './interceptors/error/error.interceptor';
 import { TokenInterceptor } from './interceptors/token/token.interceptor';
 import { API_BASE_URL } from './services/http/http.service';
 import { SharedModule } from './shared/shared.module';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
-    StickyScrollDirective,
-    InViewportDirective,
   ],
   imports: [
     BrowserModule,
@@ -24,6 +21,7 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule,
+    ToastrModule.forRoot(), 
   ],
   providers: [
     {
@@ -39,7 +37,7 @@ import { SharedModule } from './shared/shared.module';
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
       multi: true
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })

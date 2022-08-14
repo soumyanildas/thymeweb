@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CheckoutDeliveryComponent } from './checkout-delivery/checkout-delivery.component';
 import { PaymentComponent } from './payment.component';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TEConnect, TeConnectNgModule } from '@magensa/te-connect-ng';
+import { createTEConnect } from '@magensa/te-connect';
+import { environment } from 'src/environments/environment';
+
+const TE_CONNECT: TEConnect = createTEConnect(environment.teConnectKey);
 
 const routes: Routes = [
   {
@@ -13,11 +18,13 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    PaymentComponent,
-    CheckoutDeliveryComponent,
+    PaymentComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TeConnectNgModule.forRoot(TE_CONNECT),
     RouterModule.forChild(routes)
   ]
 })

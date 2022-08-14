@@ -16,7 +16,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       .pipe(
         retry(1),
         catchError((error: HttpErrorResponse) => {
-          return throwError(() => new Error('null'));
+          return throwError(() => new Error(error.message || 'Something went wrong. Please try again!'));
         })
       )
   }

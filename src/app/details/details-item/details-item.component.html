@@ -1,10 +1,17 @@
 <div class="gold-members p-3 border-bottom">
-  <a class="btn btn-outline-secondary btn-sm  float-right" href="javscript:;" (click)="addModifiers()">ADD</a>
+  <a class="btn btn-outline-secondary btn-sm float-right" *ngIf="!item.count" href="javscript:;" (click)="addModifiers()">ADD</a>
+  <span class="count-number float-right"  *ngIf="item.count">
+    <button class="btn btn-outline-secondary btn-sm left dec"  (click)="decreaseItem()"> <i class="icofont-minus"></i>
+    </button>
+    <input class="count-number-input" type="text" [value]="item.count" readonly="">
+    <button class="btn btn-outline-secondary btn-sm right inc" (click)="increaseItem()"> <i class="icofont-plus"></i>
+    </button>
+  </span>
   <div class="media">
-    <div class="mr-3"><i class="icofont-ui-press text-danger food-item"></i></div>
+    <!-- <div class="mr-3"><i class="icofont-ui-press text-danger food-item"></i></div> -->
     <div class="media-body">
-      <h6 class="mb-1">Chicken Tikka Sub</h6>
-      <p class="text-gray mb-0">$314 - 12" (30 cm)</p>
+      <h6 class="mb-1">{{ item.itemname }}</h6>
+      <p class="text-gray mb-0">${{ item.itemprice }}</p>
     </div>
   </div>
 </div>

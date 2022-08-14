@@ -7,7 +7,12 @@ import { Cart } from 'src/app/models/Cart';
 })
 export class CartService {
 
-  private cartSource$: BehaviorSubject<Cart[]> = new BehaviorSubject<Cart[]>([]);
+  private cartSource$: BehaviorSubject<Cart> = new BehaviorSubject<Cart>(
+    {
+      store: {},
+      items: []
+    }
+  );
 
   constructor() {
     this.init();
@@ -15,30 +20,39 @@ export class CartService {
 
   private init() {
     if (localStorage.getItem('cart')) {
-      const cart: Cart[] = JSON.parse(localStorage.getItem('cart') || '[]')
-      this.cartSource$ = new BehaviorSubject<any>(cart);
+      const cart: Cart = JSON.parse(localStorage.getItem('cart') || '{}')
+      this.cartSource$ = new BehaviorSubject<Cart>(cart);
     } else {
-      const cart: Cart[]= [];
-      this.cartSource$ = new BehaviorSubject<any>(cart);
+      const cart: Cart = {
+        store: {},
+        items: []
+      };
+      this.cartSource$ = new BehaviorSubject<Cart>(cart);
       localStorage.setItem('cart', JSON.stringify(cart));
     }
   }
 
-  viewCart(): Observable<Cart[]> {
+  viewCart(): Observable<Cart> {
     return this.cartSource$.asObservable();
   }
 
-  updateCart(cart: Cart[]): void {
+  updateCart(cart: Cart): void {
     this.cartSource$.next(cart);
     this.persistCart(cart);
   }
 
   emptyCart(): void {
-    this.cartSource$.next([])
-    this.persistCart([]);
+    this.cartSource$.next({
+      store: {},
+      items: []
+    });
+    this.persistCart({
+      store: {},
+      items: []
+    });
   }
 
-  private persistCart(cart: Cart[]): void {
+  private persistCart(cart: Cart): void {
     localStorage.setItem('cart', JSON.stringify(cart));
   }
 

@@ -1,3 +1,8 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
+<div *ngIf="authService.tokenSource$ | async">
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</div>
+<div class="loading-overlay" *ngIf="!(authService.tokenSource$ | async)">
+  <div class="spinner"></div>
+</div>

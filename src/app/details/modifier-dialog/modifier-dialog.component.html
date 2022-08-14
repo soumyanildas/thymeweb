@@ -3,128 +3,42 @@
     X
   </button>
 </div>
-<h2 mat-dialog-title>Shrimp Rice</h2>
+<h2 mat-dialog-title>{{ item.itemname }}</h2>
 <div class="pt-2"></div>
 <mat-dialog-content class="mat-typography">
   <div class="img-wrapper">
-    <img src="../assets/img/7.png" />
+    <img [src]="item.imgUrl" />
   </div>
   <div class="pt-2"></div>
-  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce placerat placerat mauris a interdum. Cras euismod
-    nisi ante, in dapibus lectus pellentesque sit amet. Etiam lorem diam, suscipit ac iaculis vitae, pulvinar non sem.
-    Phasellus elementum massa nisl, ac eleifend metus aliquet sed. Curabitur dignissim suscipit vehicula. Quisque
-    ullamcorper diam nec neque volutpat, tempus tempus est accumsan. Nunc ac arcu orci. Maecenas eu augue ex. </p>
-  <div class="option-section">
-    <div class="option-section-header">
-      <h4 class="option-header">Pick 1 Option</h4>
-      <div class="option-status">Required</div>
+  <p *ngIf="item.desc"> {{ item.desc }} </p>
+  <ng-container *ngFor="let modifier of item.modifiers; index as i">
+    <div class="option-section" *ngIf="modifier.modifierItems?.length">
+      <div class="option-section-header">
+        <h4 class="option-header">{{ modifier.modifierGroupName }}</h4>
+        <div class="option-status">
+          Required
+          <ng-container *ngIf="modifier.minItems < modifier.maxItems"> - Choose {{ modifier.maxItems }} {{ modifier.maxItems > 1 ? 'Items' : 'Item' }}</ng-container>
+        </div>
+      </div>
+      <div class="option-list">
+        <div class="option-list-item" *ngFor="let modifierItem of modifier.modifierItems; index as j">
+          <label [for]="modifier.id + '-' + modifierItem.id">
+            <input *ngIf="modifier.isMultiple" type="checkbox" [name]="modifier.modifierGroupName" [id]="modifier.id + '-' + modifierItem.id" [checked]="modifierItem.isSelected" [disabled]="modifier.isDisabled" (change)="selectModifier(i, j)">
+            <span class="option-list-item-name">{{ modifierItem.modifierName }}</span>
+          </label>
+        </div>
+      </div>
+      <p class="error" *ngIf="!modifier.isValid">{{ modifier.errorMessage }}</p>
     </div>
-    <div class="option-list">
-      <div class="option-list-item">
-        <label for="item-1">
-          <input type="radio" name="item-radio" id="item-1">
-          <span class="option-list-item-name">Item 1</span>
-        </label>
-      </div>
-      <div class="option-list-item pt-1">
-        <label for="item-2">
-          <input type="radio" name="item-radio" id="item-2">
-          <span class="option-list-item-name">Item 2</span>
-        </label>
-      </div>
-      <div class="option-list-item pt-1">
-        <label for="item-3">
-          <input type="radio" name="item-radio" id="item-3">
-          <span class="option-list-item-name">Item 3</span>
-        </label>
-      </div>
-      <div class="option-list-item pt-1">
-        <label for="item-4">
-          <input type="radio" name="item-radio" id="item-4">
-          <span class="option-list-item-name">Item 4</span>
-        </label>
-      </div>
-    </div>
-  </div>
-  <div class="option-section pt-4">
-    <div class="option-section-header">
-      <h4 class="option-header">Pick 2 Option</h4>
-      <div class="option-status">Required - Choose 2</div>
-    </div>
-    <div class="option-list">
-      <div class="option-list-item">
-        <label for="item-5">
-          <input type="checkbox" name="item-5" id="item-5">
-          <span class="option-list-item-name">Item 5</span>
-        </label>
-      </div>
-      <div class="option-list-item pt-1">
-        <label for="item-6">
-          <input type="checkbox" name="item-6" id="item-6">
-          <span class="option-list-item-name">Item 6</span>
-        </label>
-      </div>
-      <div class="option-list-item pt-1">
-        <label for="item-7">
-          <input type="checkbox" name="item-7" id="item-7">
-          <span class="option-list-item-name">Item 7</span>
-        </label>
-      </div>
-      <div class="option-list-item pt-1">
-        <label for="item-8">
-          <input type="checkbox" name="item-8" id="item-8">
-          <span class="option-list-item-name">Item 8</span>
-        </label>
-      </div>
-    </div>
-  </div>
-  <div class="option-section pt-4">
-    <div class="option-section-header">
-      <h4 class="option-header">Pick 2 Option</h4>
-      <div class="option-status">Required - Choose 2</div>
-    </div>
-    <div class="option-list">
-      <div class="option-list-item">
-        <label for="item-5">
-          <input type="checkbox" name="item-5" id="item-5">
-          <span class="option-list-item-name">Item 5</span>
-        </label>
-      </div>
-      <div class="option-list-item pt-1">
-        <label for="item-6">
-          <input type="checkbox" name="item-6" id="item-6">
-          <span class="option-list-item-name">Item 6</span>
-        </label>
-      </div>
-      <div class="option-list-item pt-1">
-        <label for="item-7">
-          <input type="checkbox" name="item-7" id="item-7">
-          <span class="option-list-item-name">Item 7</span>
-        </label>
-      </div>
-      <div class="option-list-item pt-1">
-        <label for="item-8">
-          <input type="checkbox" name="item-8" id="item-8">
-          <span class="option-list-item-name">Item 8</span>
-        </label>
-      </div>
-    </div>
-  </div>
+  </ng-container>
   <div class="pt-2"></div>
   <div class="special-instruction">
     <h4>Special Instructions</h4>
-    <textarea class="special-instruction-text"></textarea>
+    <textarea class="special-instruction-text" [(ngModel)]="item.specialInstructions"></textarea>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <div class="footer-btn-wrapper">
-    <span class="count-number">
-      <button class="btn btn-outline-secondary  btn-sm left dec"> <i class="icofont-minus"></i>
-      </button>
-      <input class="count-number-input" type="text" value="1" readonly="">
-      <button class="btn btn-outline-secondary btn-sm right inc"> <i class="icofont-plus"></i>
-      </button>
-    </span>
-    <a class="btn btn-outline-secondary btn-sm  float-right" href="javascript:;">Add to Order $57.00</a>
+    <a class="btn btn-outline-secondary btn-sm float-right" href="javascript:;" (click)="submit()">Add to Order ${{ calculatedPrice }}</a>
   </div>
 </mat-dialog-actions>

@@ -10,7 +10,7 @@ export class HttpService {
   constructor(
     private http: HttpClient,
     @Inject(API_BASE_URL) private readonly baseUrl: string
-  ) {}
+  ) { }
 
   get(endPoint: string): Observable<any> {
     return this.http.get(this.baseUrl + endPoint);
@@ -27,7 +27,7 @@ export class HttpService {
   delete(endPoint: string): Observable<any> {
     return this.http.delete(this.baseUrl + endPoint);
   }
-  
+
 }
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');

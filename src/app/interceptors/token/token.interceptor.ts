@@ -5,7 +5,7 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, switchMap, take } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Injectable()
@@ -18,6 +18,7 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return this.authService.tokenSource$.asObservable()
       .pipe(
+        take(1),
         switchMap((token: string) => {
           if (token) {
             request = request.clone({

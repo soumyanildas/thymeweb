@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '../models/Store';
+import { StoreService } from '../services/store/store.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  stores: Store[] = [];
+
+  constructor(
+    private storeService: StoreService
+  ) { }
 
   ngOnInit(): void {
+    this._getStores();
+  }
+
+  private _getStores(): void {
+    this.storeService.getStores()
+      .subscribe((response: Store[]) => {
+        console.log('🚀 ~ file: home.component.ts ~ line 25 ~ HomeComponent ~ .subscribe ~ response', response);
+        this.stores = response;
+      });
   }
 
 }
