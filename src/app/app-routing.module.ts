@@ -18,25 +18,31 @@ const routes: Routes = [
   // },
   {
     path: 'details/:id',
-    loadChildren: () => import('./details/details.module').then((m) => m.DetailsModule),
+    loadChildren: () => import('./components/details/details.module').then((m) => m.DetailsModule),
     canActivate: [RouteGuard],
     title: 'Store | Thymeweb'
   },
   {
     path: 'checkout',
-    loadChildren: () => import('./checkout/checkout.module').then((m) => m.CheckoutModule),
+    loadChildren: () => import('./components/checkout/checkout.module').then((m) => m.CheckoutModule),
     canActivate: [RouteGuard, PaymentGuard],
     title: 'Checkout | Thymeweb'
   },
   {
     path: 'payment',
-    loadChildren: () => import('./payment/payment.module').then((m) => m.PaymentModule),
+    loadChildren: () => import('./components/payment/payment.module').then((m) => m.PaymentModule),
     canActivate: [RouteGuard, PaymentGuard],
     title: 'Payments | Thymeweb'
   },
   {
+    path: 'thank-you',
+    loadChildren: () => import('./components/thank-you/thank-you.module').then((m) => m.ThankYouModule),
+    canActivate: [RouteGuard],
+    title: 'Thank You | Thymeweb'
+  },
+  {
     path: '**',
-    loadChildren: () => import('./error/error.module').then((m) => m.ErrorModule)
+    loadChildren: () => import('./components/error/error.module').then((m) => m.ErrorModule)
   }
 
 

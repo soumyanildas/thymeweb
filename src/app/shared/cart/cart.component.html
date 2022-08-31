@@ -1,9 +1,8 @@
-<a class="nav-link dropdown-toggle" href="javascript:;" role="button" data-toggle="dropdown" aria-haspopup="true"
-  aria-expanded="false">
+<a class="nav-link dropdown-toggle" href="javascript:;" (click)="toggleCart()">
   <i class="fas fa-shopping-basket"></i> Cart
   <span class="badge badge-success">{{ checkout.length }}</span>
 </a>
-<div class="dropdown-menu dropdown-cart-top p-0 dropdown-menu-right shadow-sm border-0" *ngIf="checkout.length">
+<div class="dropdown-menu dropdown-cart-top p-0 dropdown-menu-right shadow-sm border-0" [class]="showCart ? 'show' : null" *ngIf="checkout.length">
   <div class="dropdown-cart-top-header p-4">
     <h6 class="mb-0">My Cart</h6>
   </div>

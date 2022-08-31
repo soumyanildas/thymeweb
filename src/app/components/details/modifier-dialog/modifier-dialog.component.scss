@@ -5,7 +5,7 @@
     position: absolute;
     top: 4px;
     right: 0;
-    color: #656565;
+    color: #fff;
     font-weight: normal;
   }
 
@@ -36,7 +36,7 @@
     .option-header {
       text-transform: uppercase;
       font-size: 12px;
-      color: #656565;
+      color: #fff;
       margin-top: 17px;
     }
 
@@ -79,13 +79,13 @@
         width: 15px;
         background: #efefef;
         box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-        border-color: #000;
+        border-color: #fff;
         border-radius: 0;
         position: relative;
 
         &:checked {
-          background: #000;
-          color: #fff;
+          background: #fff;
+          color: #000;
 
           &:after {
             content: '\2713';
@@ -105,7 +105,7 @@
 
   h4 {
     text-transform: uppercase;
-    color: #656565;
+    color: #fff;
   }
 
   &-text {
@@ -113,6 +113,7 @@
     height: 100px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    resize: none;
   }
 }
 

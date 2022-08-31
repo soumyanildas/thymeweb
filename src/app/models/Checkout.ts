@@ -20,7 +20,7 @@ export interface CheckoutModifierGroupList {
 
 export interface CheckoutModifierList {
   readonly id: string;
-  readonly modifierName: string;
+  readonly modifier_name: string;
   readonly modifiersGroupId: string;
   isSelected: boolean;
   modifierPrice1: number;

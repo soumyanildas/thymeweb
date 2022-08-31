@@ -21,6 +21,7 @@ export class CartComponent extends AutoUnsubscribeComponent implements OnInit {
   checkout: Checkout[] = [];
 
   total: number = 0;
+  showCart: boolean = false;
 
   constructor(
     private cartService: CartService
@@ -49,7 +50,10 @@ export class CartComponent extends AutoUnsubscribeComponent implements OnInit {
       .subscribe((response: Checkout[]) => {
         this.checkout = response;
       });
+  }
 
+  toggleCart(): void {
+    this.showCart = !this.showCart;
   }
 
 }

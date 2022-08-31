@@ -24,7 +24,7 @@
         <div class="option-list-item" *ngFor="let modifierItem of modifier.modifierItems; index as j">
           <label [for]="modifier.id + '-' + modifierItem.id">
             <input *ngIf="modifier.isMultiple" type="checkbox" [name]="modifier.modifierGroupName" [id]="modifier.id + '-' + modifierItem.id" [checked]="modifierItem.isSelected" [disabled]="modifier.isDisabled" (change)="selectModifier(i, j)">
-            <span class="option-list-item-name">{{ modifierItem.modifierName }}</span>
+            <span class="option-list-item-name">{{ modifierItem.modifier_name }}</span>
           </label>
         </div>
       </div>

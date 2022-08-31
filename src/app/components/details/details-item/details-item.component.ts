@@ -72,6 +72,7 @@ export class DetailsItemComponent extends AutoUnsubscribeComponent implements On
       maxWidth: '100vw',
       position: { bottom: '0px' },
       height: '85vh',
+      panelClass: 'modifier',
       data: {
         store: this.store,
         item: this.item

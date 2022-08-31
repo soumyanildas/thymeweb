@@ -1,0 +1,14 @@
+<section class="section pt-5 pb-5 osahan-not-found-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center pt-5 pb-5">
+        <img class="img-fluid mb-5" src="./assets/img/thanks.png" alt="thanks">
+        <h1 class="mt-2 mb-2 text-success">Congratulations!</h1>
+        <p class="mb-2">You have successfully placed your order</p>
+        <p class="mb-2" *ngIf="data">Your Order Number is  - {{ data.order_id }}</p>
+        <p class="mb-5" *ngIf="data">Order ID is this - {{ data.display_id }}</p>
+
+      </div>
+    </div>
+  </div>
+</section>

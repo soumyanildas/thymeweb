@@ -2,11 +2,11 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap, takeUntil, tap } from 'rxjs';
-import { Department, DepartmentModified } from '../models/Department';
-import { Item, ItemModified } from '../models/Item';
-import { Store, StoreModified } from '../models/Store';
-import { StoreService } from '../services/store/store.service';
-import { AutoUnsubscribeComponent } from '../shared/auto-unsubscribe/auto-unsubscribe.component';
+import { Department, DepartmentModified } from '../../models/Department';
+import { Item, ItemModified } from '../../models/Item';
+import { Store, StoreModified } from '../../models/Store';
+import { StoreService } from '../../services/store/store.service';
+import { AutoUnsubscribeComponent } from '../../shared/auto-unsubscribe/auto-unsubscribe.component';
 
 @Component({
   selector: 'app-details',

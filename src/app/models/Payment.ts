@@ -1,15 +1,31 @@
 export interface Payment {
-  orderID: string;
-  display_id: string;
-  current_state: string;
-  customer: PaymentCustomer;
+  order_info: PaymentOrderInfo;
+  customer?: PaymentCustomer;
   store: Partial<PaymentStore>;
-  serivceType: string;
   invoice: {
+    grandtotal: number;
+    subtotal: number;
+    tax: number;
+    taxedSales: number;
+    nonTaxedSales: number;
     items: PaymentItem[];
-    payment?: string;
+  }
+  payment: {
+    payment_token?: string;
+    payment_type?: string;
+    payment_status?: string;
   }
 }
+
+export interface PaymentOrderInfo {
+  created_time: number;
+  current_state: string;
+  order_type: string;
+  pickup_time: number;
+  store_id: string;
+}
+
+
 
 export interface PaymentItem {
   id: string;
@@ -17,7 +33,8 @@ export interface PaymentItem {
   quantity: number;
   price: number;
   specialInstructions?: string;
-  selected_modifier?: PaymentModifier[];
+  taxable: boolean;
+  modifiers?: PaymentModifier[];
 }
 
 
@@ -26,17 +43,16 @@ export interface PaymentModifier {
   modifiername: string;
   quantity: number;
   price: number;
+  taxable: boolean;
 }
 
 export interface PaymentCustomer {
   first_name: string;
   phone: string;
-  email: string;
-  id: string;
+  "e-mail": string;
 }
 
 export interface PaymentStore {
   id: string;
   name: string;
-  merchant_store_id: string;
 }

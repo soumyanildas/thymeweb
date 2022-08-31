@@ -9,4 +9,5 @@ export interface Cart {
 export interface CartItem extends ItemModified {
   quantity: number;
   totalPrice: number;
+  isTaxable: boolean;
 }

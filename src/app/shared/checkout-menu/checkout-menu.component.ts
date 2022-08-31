@@ -36,6 +36,8 @@ export class CheckoutMenuComponent extends AutoUnsubscribeComponent implements O
   checkout: Checkout[] = [];
 
   total: number = 0;
+  taxAmount: number = 0;
+  totalAfterTax: number = 0;
 
   constructor(
     private cartService: CartService
@@ -55,6 +57,8 @@ export class CheckoutMenuComponent extends AutoUnsubscribeComponent implements O
           if (this.cart.items.length) {
             const checkout = CheckoutUtil.getCheckout(this.cart);
             this.total = parseFloat(checkout.reduce((prev: number, next: Checkout) => prev + next.totalPrice, 0).toFixed(2));
+            this.taxAmount = this._calculateTax(checkout);
+            this.totalAfterTax = parseFloat((this.total + this.taxAmount).toFixed(2));
             return checkout;
           }
           return [];
@@ -73,12 +77,14 @@ export class CheckoutMenuComponent extends AutoUnsubscribeComponent implements O
   }
 
   decreaseItem(index: number): void {
+    console.log('🚀 ~ file: checkout-menu.component.ts ~ line 76 ~ CheckoutMenuComponent ~ decreaseItem ~ index', index);
+    console.log('🚀 ~ file: checkout-menu.component.ts ~ line 83 ~ CheckoutMenuComponent ~ decreaseItem ~ this.cart.items[index]', this.cart.items[index]);
     // calculating price
     const calculatedPrice = this.cart.items[index].totalPrice / this.cart.items[index].quantity;
     this.cart.items[index].quantity--;
-    this.cart.items[index].totalPrice -= calculatedPrice;
+    this.cart.items[index].totalPrice = parseFloat((this.cart.items[index].totalPrice - calculatedPrice).toFixed(2));
     this.cartService.updateCart(this.cart)
-    if (this.cart.items[index].quantity === 0) {
+    if (this.cart.items[index] && !this.cart.items[index].quantity) {
       this.cart.items.splice(index, 1);
     }
     CheckoutUtil.getCheckout(this.cart);
@@ -94,6 +100,16 @@ export class CheckoutMenuComponent extends AutoUnsubscribeComponent implements O
     this.cart.items[index].totalPrice += calculatedPrice;
     CheckoutUtil.getCheckout(this.cart);
     this.cartService.updateCart(this.cart);
+  }
+
+  private _calculateTax(checkout: Checkout[]): number {
+    let taxAmount = 0;
+    for (let i = 0; i < checkout.length; i += 1) {
+      if (checkout[i].isTaxable && this.cart.store.taxRate) {
+        taxAmount += (this.cart.store.taxRate / (100 * 100)) * checkout[i].totalPrice; 
+      }
+    }
+    return parseFloat(taxAmount.toFixed(2));
   }
 
 

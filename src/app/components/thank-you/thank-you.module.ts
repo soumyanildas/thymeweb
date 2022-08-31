@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CheckoutComponent } from './checkout.component';
+import { ThankYouComponent } from './thank-you.component';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
-
 
 const routes: Routes = [
   {
     path: '',
-    component: CheckoutComponent
+    component: ThankYouComponent
   }
 ];
 
 @NgModule({
   declarations: [
-    CheckoutComponent
+    ThankYouComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
-    SharedModule
+    RouterModule.forChild(routes)
+  ],
+  exports: [
+    ThankYouComponent
   ]
 })
-export class CheckoutModule { }
+export class ThankYouModule { }

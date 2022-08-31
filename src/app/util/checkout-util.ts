@@ -14,14 +14,14 @@ export class CheckoutUtil {
             map((modifierItem: ModifierList) => {
               return {
                 id: modifierItem.id,
-                modifierName: modifierItem.modifierName,
+                modifier_name: modifierItem.modifier_name,
                 modifiersGroupId: modifierItem.modifiersGroupId,
                 isSelected: modifierItem.isSelected,
                 modifierPrice1: modifierItem.modifierPrice1
               }
             }),
           modifierItemsText: modifier.modifierItems.length ? modifier.modifierItems
-            .reduce((prev: string, next: ModifierList) => next.isSelected ? prev + next.modifierName + ', ' : prev, '').replace(/,\s*$/, '') : ''
+            .reduce((prev: string, next: ModifierList) => next.isSelected ? prev + next.modifier_name + ', ' : prev, '').replace(/,\s*$/, '') : ''
         };
       });
       return {

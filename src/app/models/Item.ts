@@ -26,7 +26,7 @@ export interface ModifierGroupList {
 
 export interface ModifierList {
   readonly id: string;
-  readonly modifierName: string;
+  readonly modifier_name: string;
   readonly modifiersGroupId: string;
   isSelected: boolean;
   modifierPrice1: number;
@@ -75,7 +75,11 @@ export class Item {
       for (let j = 0; j < this.modifierList.length; j += 1) {
         if (this.modifierList[j].modifiersGroupId === this.modifierGroupList[i].id) {
           this.modifierList[j].isSelected = false;
-          this.modifierList[j].modifierPrice1 = this.modifierList[j].modifierPrice1 / 100;
+          if (this.modifierList[j].modifierPrice1) {
+            this.modifierList[j].modifierPrice1 = this.modifierList[j].modifierPrice1 / 100;
+          } else {
+            this.modifierList[j].modifierPrice1 = 0;
+          }
           item.modifiers[i].modifierItems?.push(this.modifierList[j]);
         }
       }

@@ -6,7 +6,6 @@ import { takeUntil } from 'rxjs';
 import { Cart } from 'src/app/models/Cart';
 import { ItemModified, Modifier, ModifierList } from 'src/app/models/Item';
 import { CartService } from 'src/app/services/cart/cart.service';
-import { StoreService } from 'src/app/services/store/store.service';
 import { AutoUnsubscribeComponent } from 'src/app/shared/auto-unsubscribe/auto-unsubscribe.component';
 @Component({
   selector: 'app-modifier-dialog',
@@ -26,11 +25,11 @@ export class ModifierDialogComponent extends AutoUnsubscribeComponent implements
     @Inject(MAT_DIALOG_DATA) private readonly data: any,
     private dialog: MatDialogRef<ModifierDialogComponent>,
     private cartService: CartService,
-    private storeService: StoreService,
     private toastr: ToastrService
   ) {
     super();
     if (data.item) {
+      console.log('🚀 ~ file: modifier-dialog.component.ts ~ line 34 ~ ModifierDialogComponent ~ data.item', data.item);
       this.item = cloneDeep(data.item);
     }
   }
@@ -122,16 +121,22 @@ export class ModifierDialogComponent extends AutoUnsubscribeComponent implements
       this.cart.items.push({
         ...this.item,
         quantity: 1,
-        totalPrice: calculatedPrice
+        totalPrice: calculatedPrice,
       });
     }
     this.cartService.updateCart(this.cart);
   }
 
   private _getTotalPrice(): number {
-    return this.item.itemprice + this.item.modifiers
-      .reduce((prev: number, next: Modifier) => prev + next.modifierItems
-        .reduce((prev: number, next: ModifierList) => prev + next.modifierPrice1, 0), 0)
+    let modifierTotal = 0;
+    for (let i = 0; i < this.item.modifiers.length; i += 1) {
+      for (let j = 0; j < this.item.modifiers[i].modifierItems.length; j += 1) {
+        if (this.item.modifiers[i].modifierItems[j].isSelected) {
+          modifierTotal += this.item.modifiers[i].modifierItems[j].modifierPrice1;
+        }
+      }
+    }
+    return parseFloat((this.item.itemprice + modifierTotal).toFixed(2));
   }
 
   private _isValid(): boolean {

@@ -48,7 +48,7 @@
   </div>
   <div class="mb-2 bg-white rounded p-2 clearfix" *ngIf="checkout.length">
     <p class="mb-1">Item Total <span class="float-right text-dark">${{ total }}</span></p>
-    <p class="mb-1">Tax <span class="float-right text-dark">$62.8</span></p>
+    <p class="mb-1">Tax <span class="float-right text-dark">${{ taxAmount }}</span></p>
     <!-- <p class="mb-1">Delivery Fee <span class="text-info" data-toggle="tooltip" data-placement="top"
         title="Total discount breakup">
         <i class="icofont-info-circle"></i>
@@ -58,8 +58,8 @@
       <span class="float-right text-success">$1884</span>
     </p> -->
     <hr />
-    <h6 class="font-weight-bold mb-0">TO PAY <span class="float-right">${{ total }}</span></h6>
+    <h6 class="font-weight-bold mb-0">TO PAY <span class="float-right">${{ totalAfterTax }}</span></h6>
   </div>
-  <a [routerLink]="nextPageLink" class="btn btn-success btn-block btn-lg" *ngIf="checkout.length">{{ buttonText }} <ng-container *ngIf="showTotalText">${{ total }}</ng-container>
+  <a [routerLink]="nextPageLink" class="btn btn-success btn-block btn-lg" *ngIf="checkout.length">{{ buttonText }} <ng-container *ngIf="showTotalText">${{ totalAfterTax }}</ng-container>
   <i class="icofont-long-arrow-right"></i></a>
 </div>
