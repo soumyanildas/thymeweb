@@ -49,7 +49,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'top',
+    useHash: false
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
