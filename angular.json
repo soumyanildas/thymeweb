@@ -87,7 +87,8 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "thymeweb:build"
+            "browserTarget": "thymeweb:build",
+            "port": 443
           }
         },
         "test": {
