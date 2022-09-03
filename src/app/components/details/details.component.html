@@ -70,7 +70,7 @@
           </div>
           <!-- Checkout bill -->
           <div class="col-md-4">
-            <app-checkout-menu [buttonText]="'Checkout'" [showPromo]="false" [nextPageLink]="'/checkout'"></app-checkout-menu>
+            <app-checkout-menu [isFixed]="screenMode === 'small'" [buttonText]="'Checkout'" [showPromo]="false" [nextPageLink]="'/checkout'"></app-checkout-menu>
           </div>
           <!-- End of Checkout bill -->
         </div>

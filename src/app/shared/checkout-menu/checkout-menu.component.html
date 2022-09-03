@@ -60,6 +60,5 @@
     <hr />
     <h6 class="font-weight-bold mb-0">TO PAY <span class="float-right">${{ totalAfterTax }}</span></h6>
   </div>
-  <a [routerLink]="nextPageLink" class="btn btn-success btn-block btn-lg" *ngIf="checkout.length">{{ buttonText }} <ng-container *ngIf="showTotalText">${{ totalAfterTax }}</ng-container>
-  <i class="icofont-long-arrow-right"></i></a>
+  <a [routerLink]="nextPageLink" class="btn btn-success btn-block btn-lg" [class]="isFixed ? 'footer-fixed' : null" *ngIf="checkout.length">{{ buttonText }} <ng-container *ngIf="showTotalText">${{ totalAfterTax }}</ng-container><i class="icofont-long-arrow-right"></i></a>
 </div>

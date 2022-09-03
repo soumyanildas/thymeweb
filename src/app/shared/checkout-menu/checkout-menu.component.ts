@@ -28,6 +28,9 @@ export class CheckoutMenuComponent extends AutoUnsubscribeComponent implements O
   @Input()
   updateCart: boolean = false;
 
+  @Input()
+  isFixed: boolean = false;
+
   cart: Cart = {
     store: {},
     items: []

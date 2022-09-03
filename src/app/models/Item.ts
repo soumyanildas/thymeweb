@@ -8,6 +8,7 @@ export interface Inventory {
   readonly desc?: string;
   readonly itemSpcl?: boolean;
   readonly itemOnHH?: boolean;
+  readonly itemhasMod?: boolean;
   specialInstructions?: string;
 }
 

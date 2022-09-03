@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap, takeUntil, tap } from 'rxjs';
 import { Department, DepartmentModified } from '../../models/Department';
@@ -18,6 +18,7 @@ export class DetailsComponent extends AutoUnsubscribeComponent implements OnInit
   currentPage!: number;
   items: ItemModified[] = [];
   store!: StoreModified;
+  screenMode!: string;
 
   constructor(
     @Inject(DOCUMENT) private readonly document: Document,
@@ -27,7 +28,28 @@ export class DetailsComponent extends AutoUnsubscribeComponent implements OnInit
     super();
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    let screenWidth = window.innerWidth;
+
+    if (screenWidth > 760) {
+      this.screenMode = 'big'
+    }
+    else {
+      this.screenMode = 'small';
+    }
+  }
+
+
   ngOnInit(): void {
+    //Initial screenMode setup
+    let screenWidth = window.innerWidth;
+    if (screenWidth > 760) {
+      this.screenMode = 'big'
+    }
+    else {
+      this.screenMode = 'small';
+    }
     this._getDetails();
   }
 
